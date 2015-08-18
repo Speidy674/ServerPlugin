@@ -14,11 +14,11 @@ public class ChatListener implements Listener {
 		if(e.getMessage().startsWith("@")) {
 			for(Player p : Bukkit.getOnlinePlayers()) {
 				if(message.contains("@"+p.getName())) {
+					e.setCancelled(true);
 					int atIndex = message.indexOf('@');
 					String msg = message.substring(0, p.getName().length()+2);
 					String prefix = message.substring(atIndex, atIndex+p.getName().length());
 					p.sendMessage("§c"+prefix+"§f "+msg);
-					e.setCancelled(true);
 				}
 			}
 		}
