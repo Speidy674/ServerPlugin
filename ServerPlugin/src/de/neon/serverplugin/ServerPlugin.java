@@ -142,6 +142,9 @@ public class ServerPlugin extends JavaPlugin {
 							if (identifier.equalsIgnoreCase("dex")) {
 								return String.valueOf(DataUtil.geti(p, "dexterity"));
 							}
+							if (identifier.equalsIgnoreCase("xp")) {
+								return String.valueOf(DataUtil.getf(p, "xp"));
+							}
 							//was not a correct identifier
 							return null;
 						}
