@@ -2,6 +2,7 @@ name: ServerPlugin
 author: Neon
 version: 1.0
 main: de.neon.serverplugin.ServerPlugin
+depend: [DeluxeChat,Vault]
 commands:
   duel:
     aliases: [d]

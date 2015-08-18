@@ -40,7 +40,7 @@ public class ServerPlugin extends JavaPlugin {
 	public void onEnable() {
 		System.out.println("[ServerPlugin] Enabled");
 		
-		//DeluxChatHook();
+		DeluxChatHook();
 		
 		Bukkit.getPluginCommand("duel").setExecutor(new DuelCommand(this));
 		Bukkit.getPluginCommand("stats").setExecutor(new StatsCommand());
@@ -64,6 +64,7 @@ public class ServerPlugin extends JavaPlugin {
 					}
 					obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 					obj.setDisplayName("§6Stats");
+					obj.getScore(p.getName()).setScore(1000);
 					obj.getScore("§bSTR").setScore(DataUtil.geti(p, "strength"));
 					obj.getScore("§bDEF").setScore(DataUtil.geti(p, "defensive"));
 					obj.getScore("§bVIT").setScore(DataUtil.geti(p, "vitality"));
