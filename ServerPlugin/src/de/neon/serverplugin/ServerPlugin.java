@@ -9,8 +9,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.neon.serverplugin.actionbar.Actionbar;
 import de.neon.serverplugin.command.DuelCommand;
 import de.neon.serverplugin.command.StatsCommand;
-import de.neon.serverplugin.listener.XPListener;
 import de.neon.serverplugin.listener.DuelListener;
+import de.neon.serverplugin.listener.XPListener;
+import me.clip.deluxechat.placeholders.DeluxePlaceholderHook;
+import me.clip.deluxechat.placeholders.PlaceholderHandler;
 
 public class ServerPlugin extends JavaPlugin {
 	
@@ -33,6 +35,9 @@ public class ServerPlugin extends JavaPlugin {
 	
 	public void onEnable() {
 		System.out.println("[ServerPlugin] Enabled");
+		
+		DeluxChatHook();
+		
 		Bukkit.getPluginCommand("duel").setExecutor(new DuelCommand(this));
 		Bukkit.getPluginCommand("stats").setExecutor(new StatsCommand());
 		Bukkit.getPluginManager().registerEvents(new DuelListener(), this);
@@ -88,5 +93,39 @@ public class ServerPlugin extends JavaPlugin {
 				}
 			}
 		}, 0, pluginTickRate);
+	}
+	
+	public void DeluxChatHook(){
+		
+		if (Bukkit.getPluginManager().isPluginEnabled("DeluxeChat")) {
+
+			boolean hooked = PlaceholderHandler.registerPlaceholderHook(this,
+					new DeluxePlaceholderHook() {
+
+						/*
+						 * this method will be called any time a placeholder
+						 * %<yourplugin>_<identifier>% is found
+						 */
+						@Override
+						public String onPlaceholderRequest(Player p, String identifier) {
+
+							if (identifier.equalsIgnoreCase("lvl")) {
+								return String.valueOf(DataUtil.geti(p, "level"));
+							}
+							//was not a correct identifier
+							return null;
+						}
+					});
+			
+			if (hooked) {
+				getLogger().info("DeluxeChat placeholder hook was successfully registered!");
+			}
+		}
+		
+	}
+	
+	public void onDisable() {
+
+		PlaceholderHandler.unregisterPlaceholderHook(this);
 	}
 }
