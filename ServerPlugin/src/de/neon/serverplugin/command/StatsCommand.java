@@ -34,7 +34,7 @@ public class StatsCommand implements CommandExecutor {
 						p.sendMessage("§bDefensive: §6"+DataUtil.geti(p, "defensive"));
 						p.sendMessage("§bVitality: §6"+DataUtil.geti(p, "vitality"));
 						p.sendMessage("§bDexterity: §6"+DataUtil.geti(p, "dexterity"));
-						p.sendMessage("§b"+DataUtil.geti(p, "wins")+"§f-§4"+DataUtil.geti(p, "loses")+" §brecord");
+						p.sendMessage("§bDuel Record: §a"+DataUtil.geti(p, "wins")+"§f-§4"+DataUtil.geti(p, "loses")+" §b(Win/Loses)");
 						p.sendMessage("§bSkillpoints: §6"+DataUtil.geti(p, "skillpoints"));
 						p.sendMessage("§c--------------------");
 					} else {
@@ -64,7 +64,7 @@ public class StatsCommand implements CommandExecutor {
 						messageD.sendToPlayer(p);
 						messageV.sendToPlayer(p);
 						messageX.sendToPlayer(p);
-						p.sendMessage("§b"+DataUtil.geti(p, "wins")+"§f-§4"+DataUtil.geti(p, "loses")+" §brecord");
+						p.sendMessage("§bDuel Record: §a"+DataUtil.geti(p, "wins")+"§f-§4"+DataUtil.geti(p, "loses")+" §b(Win/Loses)");
 						p.sendMessage("§bSkillpoints: §6"+DataUtil.geti(p, "skillpoints"));
 						p.sendMessage("§c--------------------");
 					}
