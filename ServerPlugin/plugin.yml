@@ -1,0 +1,14 @@
+name: ServerPlugin
+author: Neon
+version: 1.0
+
+main: de.neon.serverplugin.ServerPlugin
+
+commands:
+  duel:
+    aliases: [d]
+    discription: Duel with someone.
+    usage: </duel>
+  stats:
+    discription: View/Skill your stats.
+    usage: </skill>
