@@ -8,7 +8,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import de.neon.serverplugin.DataUtil;
 import de.neon.serverplugin.Util;
 
-public class PlayerListener implements Listener {
+public class DuelListener implements Listener {
 
 	@EventHandler
 	public void onPlayerDamageByPlayer(EntityDamageByEntityEvent e) {
