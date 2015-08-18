@@ -27,23 +27,23 @@ public class StatsCommand implements CommandExecutor {
 						int level = DataUtil.geti(p, "level");
 						float xp = DataUtil.getf(p, "xp");
 						float xpfnl = Util.experienceRequied(level+1);
-						p.sendMessage("§c--------Stats--------");
+						p.sendMessage("§c--------Statistics--------");
 						p.sendMessage("§bLevel: §6"+level);
-						p.sendMessage("§bXP: §6"+Util.formatFloat(xp, 1)+"§6/§6"+Util.formatFloat(xpfnl, 1));
+						p.sendMessage("§bXP: §6"+Util.formatFloat(xp, 1)+"§f/§6"+Util.formatFloat(xpfnl, 1));
 						p.sendMessage("§bStrength: §6"+DataUtil.geti(p, "strength"));
 						p.sendMessage("§bDefensive: §6"+DataUtil.geti(p, "defensive"));
 						p.sendMessage("§bVitality: §6"+DataUtil.geti(p, "vitality"));
 						p.sendMessage("§bDexterity: §6"+DataUtil.geti(p, "dexterity"));
-						p.sendMessage("§bDuel Record: §a"+DataUtil.geti(p, "wins")+"§f-§4"+DataUtil.geti(p, "loses")+" §b(Win/Loses)");
+						p.sendMessage("§bDuel Record: §a"+DataUtil.geti(p, "wins")+"§f - §4"+DataUtil.geti(p, "loses")+" §b(Win/Loses)");
 						p.sendMessage("§bSkillpoints: §6"+DataUtil.geti(p, "skillpoints"));
 						p.sendMessage("§c--------------------");
 					} else {
 						int level = DataUtil.geti(p, "level");
 						float xp = DataUtil.getf(p, "xp");
 						float xpfnl = Util.experienceRequied(level+1);
-						p.sendMessage("§c--------Stats--------");
+						p.sendMessage("§c--------Statistics--------");
 						p.sendMessage("§bLevel: §6"+level);
-						p.sendMessage("§bXP: §5"+Util.formatFloat(xp, 1)+"§6/§6"+Util.formatFloat(xpfnl, 1));
+						p.sendMessage("§bXP: §6"+Util.formatFloat(xp, 1)+"§f/§6"+Util.formatFloat(xpfnl, 1));
 						JSONChatMessage messageS = new JSONChatMessage("§bStrength: §6"+DataUtil.geti(p, "strength"), JSONChatColor.DARK_RED, null);
 						JSONChatExtra extraS = new JSONChatExtra(" [+]", JSONChatColor.GRAY, Arrays.asList(JSONChatFormat.BOLD));
 						extraS.setClickEvent(JSONChatClickEventType.RUN_COMMAND, "/stats strength");
@@ -64,7 +64,7 @@ public class StatsCommand implements CommandExecutor {
 						messageD.sendToPlayer(p);
 						messageV.sendToPlayer(p);
 						messageX.sendToPlayer(p);
-						p.sendMessage("§bDuel Record: §a"+DataUtil.geti(p, "wins")+"§f-§4"+DataUtil.geti(p, "loses")+" §b(Win/Loses)");
+						p.sendMessage("§bDuel Record: §a"+DataUtil.geti(p, "wins")+"§f - §4"+DataUtil.geti(p, "loses")+" §b(Win/Loses)");
 						p.sendMessage("§bSkillpoints: §6"+DataUtil.geti(p, "skillpoints"));
 						p.sendMessage("§c--------------------");
 					}
