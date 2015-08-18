@@ -65,10 +65,10 @@ public class ServerPlugin extends JavaPlugin {
 					obj.setDisplaySlot(DisplaySlot.SIDEBAR);
 					obj.setDisplayName("§6Stats");
 					obj.getScore(p.getName()).setScore(1000);
-					obj.getScore("§bSTR").setScore(DataUtil.geti(p, "strength"));
-					obj.getScore("§bDEF").setScore(DataUtil.geti(p, "defensive"));
-					obj.getScore("§bVIT").setScore(DataUtil.geti(p, "vitality"));
-					obj.getScore("§bDEX").setScore(DataUtil.geti(p, "dexterity"));
+					obj.getScore("§bStärke").setScore(DataUtil.geti(p, "strength"));
+					obj.getScore("§bVerteidigung").setScore(DataUtil.geti(p, "defensive"));
+					obj.getScore("§bVitalität").setScore(DataUtil.geti(p, "vitality"));
+					obj.getScore("§bGeschicklichkeit").setScore(DataUtil.geti(p, "dexterity"));
 					p.setScoreboard(board);
 					
 					float per1 = Util.getXPPercentage(p);
