@@ -9,8 +9,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.neon.serverplugin.actionbar.Actionbar;
 import de.neon.serverplugin.command.DuelCommand;
 import de.neon.serverplugin.command.StatsCommand;
-import de.neon.serverplugin.command.TestCommand;
-import de.neon.serverplugin.listener.ChatListener;
 import de.neon.serverplugin.listener.XPListener;
 import de.neon.serverplugin.listener.DuelListener;
 
@@ -37,10 +35,8 @@ public class ServerPlugin extends JavaPlugin {
 		System.out.println("[ServerPlugin] Enabled");
 		Bukkit.getPluginCommand("duel").setExecutor(new DuelCommand(this));
 		Bukkit.getPluginCommand("stats").setExecutor(new StatsCommand());
-		Bukkit.getPluginCommand("test").setExecutor(new TestCommand(this));
 		Bukkit.getPluginManager().registerEvents(new DuelListener(), this);
 		Bukkit.getPluginManager().registerEvents(new XPListener(), this);
-		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 		public void run() {
 				for(Player p : Bukkit.getOnlinePlayers()) {
