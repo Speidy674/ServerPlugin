@@ -2,17 +2,21 @@ package de.neon.serverplugin;
 
 import java.io.File;
 
+import me.clip.deluxechat.placeholders.DeluxePlaceholderHook;
+import me.clip.deluxechat.placeholders.PlaceholderHandler;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scoreboard.DisplaySlot;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
 import de.neon.serverplugin.actionbar.Actionbar;
 import de.neon.serverplugin.command.DuelCommand;
 import de.neon.serverplugin.command.StatsCommand;
 import de.neon.serverplugin.listener.DuelListener;
 import de.neon.serverplugin.listener.XPListener;
-import me.clip.deluxechat.placeholders.DeluxePlaceholderHook;
-import me.clip.deluxechat.placeholders.PlaceholderHandler;
 
 public class ServerPlugin extends JavaPlugin {
 	
@@ -52,6 +56,20 @@ public class ServerPlugin extends JavaPlugin {
 							DataUtil.correctAccount(p);
 						}
 					}
+					
+					Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+					Objective obj = board.getObjective("Stats");
+					if(obj == null) {
+						obj = board.registerNewObjective("Stats", "dummy");
+					}
+					obj.setDisplaySlot(DisplaySlot.SIDEBAR);
+					obj.setDisplayName("§6Stats");
+					obj.getScore("§bSTR").setScore(DataUtil.geti(p, "strength"));
+					obj.getScore("§bDEF").setScore(DataUtil.geti(p, "defensive"));
+					obj.getScore("§bVIT").setScore(DataUtil.geti(p, "vitality"));
+					obj.getScore("§bDEX").setScore(DataUtil.geti(p, "dexterity"));
+					p.setScoreboard(board);
+					
 					float per1 = Util.getXPPercentage(p);
 					String per = Util.formatFloat(per1, 1);
 					String msg1 = "§2Level "+DataUtil.geti(p, "level")+" ";
