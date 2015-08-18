@@ -40,7 +40,7 @@ public class ServerPlugin extends JavaPlugin {
 	public void onEnable() {
 		System.out.println("[ServerPlugin] Enabled");
 		
-		DeluxChatHook();
+		//DeluxChatHook();
 		
 		Bukkit.getPluginCommand("duel").setExecutor(new DuelCommand(this));
 		Bukkit.getPluginCommand("stats").setExecutor(new StatsCommand());
