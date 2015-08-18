@@ -143,7 +143,10 @@ public class ServerPlugin extends JavaPlugin {
 								return String.valueOf(DataUtil.geti(p, "dexterity"));
 							}
 							if (identifier.equalsIgnoreCase("xp")) {
-								return String.valueOf(DataUtil.getf(p, "xp"));
+								return Util.formatFloat(DataUtil.getf(p, "xp"), 1);
+							}
+							if (identifier.equalsIgnoreCase("xpnl")) {
+								return Util.formatFloat(Util.experienceRequied(DataUtil.geti(p, "level")+1), 1);
 							}
 							//was not a correct identifier
 							return null;

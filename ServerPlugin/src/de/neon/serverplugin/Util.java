@@ -54,6 +54,9 @@ public class Util {
 				sub = i;
 			}
 		}
+		if(s.length() < sub+amount) {
+			return s;
+		}
 		return s.substring(0, sub+amount+1);
 	}
 }
