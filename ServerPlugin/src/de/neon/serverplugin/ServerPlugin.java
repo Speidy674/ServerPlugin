@@ -49,7 +49,7 @@ public class ServerPlugin extends JavaPlugin {
 					}
 					float per1 = Util.getXPPercentage(p);
 					String per = Util.formatFloat(per1, 1);
-					String msg1 = "§aLevel "+DataUtil.geti(p, "level")+" ";
+					String msg1 = "§2Level "+DataUtil.geti(p, "level")+" ";
 					String msg = "";
 					if(per1 >= 0) {
 						msg = msg1+"§4[§c    §6"+per+"%§c     §4]";
