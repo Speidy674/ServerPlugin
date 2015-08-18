@@ -14,4 +14,4 @@ commands:
     usage: </skill>
   test:
     discription: View/Skill your stats.
-    usage: </skill>
+    usage: </test>
