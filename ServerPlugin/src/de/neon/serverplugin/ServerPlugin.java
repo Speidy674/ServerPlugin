@@ -130,6 +130,18 @@ public class ServerPlugin extends JavaPlugin {
 							if (identifier.equalsIgnoreCase("lvl")) {
 								return String.valueOf(DataUtil.geti(p, "level"));
 							}
+							if (identifier.equalsIgnoreCase("str")) {
+								return String.valueOf(DataUtil.geti(p, "strength"));
+							}
+							if (identifier.equalsIgnoreCase("def")) {
+								return String.valueOf(DataUtil.geti(p, "defensive"));
+							}
+							if (identifier.equalsIgnoreCase("vit")) {
+								return String.valueOf(DataUtil.geti(p, "vitality"));
+							}
+							if (identifier.equalsIgnoreCase("dex")) {
+								return String.valueOf(DataUtil.geti(p, "dexterity"));
+							}
 							//was not a correct identifier
 							return null;
 						}
