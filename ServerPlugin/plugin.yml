@@ -2,6 +2,7 @@ name: ServerPlugin
 author: Neon
 version: 1.0
 
+depends: [Vault,PermissionsEx,WorldEdit,WorldGuard,DeluxChat]
 main: de.neon.serverplugin.ServerPlugin
 
 commands:
