@@ -13,12 +13,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-public class TeleportCommand implements CommandExecutor {
+public class TeleportHereCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
 		if(s instanceof Player) {
 			Player p = (Player) s;
-			if(cmd.getName().equalsIgnoreCase("teleport")) {
+			if(cmd.getName().equalsIgnoreCase("teleporthere")) {
 				if(args.length == 0) {
 					if(Bukkit.getOnlinePlayers().size() == 1) {
 						p.sendMessage("§4Du bist der einzige auf dem Server.");
@@ -31,7 +31,7 @@ public class TeleportCommand implements CommandExecutor {
 							players.add(player);
 						}
 					}
-					Inventory inv = Bukkit.createInventory(p, size, "Teleport-Menü");
+					Inventory inv = Bukkit.createInventory(p, size, "Teleport Menü");
 					for(Player player : players) {
 						ItemStack item = new ItemStack(Material.SKULL_ITEM);
 						SkullMeta meta = (SkullMeta) item.getItemMeta();
@@ -48,13 +48,14 @@ public class TeleportCommand implements CommandExecutor {
 						p.sendMessage("§4Der Spieler "+args[0]+" ist nicht online.");
 						return true;
 					}
-					p.teleport(target);
-					p.sendMessage("§aDu hast dich zu §b"+target.getName()+" §ateleportiert.");
-					target.sendMessage("§b"+p.getName()+" §6hat sich zu dir teleportiert.");
+					target.teleport(p);
+					p.sendMessage("§aDu §b"+target.getName()+" zu dir teleportiert.");
+					target.sendMessage("§b"+p.getName()+" §6hat dich zu ihm teleporiert");
 					return true;
 				}
 			}
 		}
 		return false;
 	}
+
 }

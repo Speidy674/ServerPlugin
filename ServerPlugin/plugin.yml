@@ -14,4 +14,8 @@ commands:
   teleport:
     discription: Teleport yourself.
     aliases: [tp]
-    usage: </teleport> (Player1) (Player2)
+    usage: </teleport> (Player1)
+  teleporthere:
+    discription: Teleport someone to you.
+    aliases: [tphere, tph]
+    usage: </teleporthere> (Player1)
