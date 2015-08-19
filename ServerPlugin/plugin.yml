@@ -11,6 +11,3 @@ commands:
   stats:
     discription: View/Skill your stats.
     usage: </stats>
-  skill:
-    discription: skill book.
-    usage: </skill>
