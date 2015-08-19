@@ -20,7 +20,7 @@ import de.neon.serverplugin.json.JSONChatMessage;
 
 public class DuelCommand implements CommandExecutor {
 
-	private ServerPlugin plugin;
+	public static ServerPlugin plugin;
 	
 	public DuelCommand(ServerPlugin plugin) {
 		this.plugin = plugin;
