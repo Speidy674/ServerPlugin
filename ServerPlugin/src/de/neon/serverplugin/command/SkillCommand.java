@@ -28,6 +28,7 @@ public class SkillCommand implements CommandExecutor {
 				try {
 					ItemStack book = new ItemStack(Material.BOOK);
 					BookMeta meta = (BookMeta) book.getItemMeta();
+					meta.setDisplayName("§6Skill-Buch");
 					Field pagesField = null;
 					pagesField = CraftMetaBook.class.getDeclaredField("pages");
 					pagesField.setAccessible(true);
