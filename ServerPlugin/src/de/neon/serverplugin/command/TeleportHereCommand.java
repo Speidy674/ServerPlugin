@@ -49,8 +49,8 @@ public class TeleportHereCommand implements CommandExecutor {
 						return true;
 					}
 					target.teleport(p);
-					p.sendMessage("§aDu §b"+target.getName()+" zu dir teleportiert.");
-					target.sendMessage("§b"+p.getName()+" §6hat dich zu ihm teleporiert");
+					p.sendMessage("§aDu hast §b"+target.getName()+" §azu dir teleportiert.");
+					target.sendMessage("§b"+p.getName()+" §6hat dich zu ihm teleporiert.");
 					return true;
 				}
 			}

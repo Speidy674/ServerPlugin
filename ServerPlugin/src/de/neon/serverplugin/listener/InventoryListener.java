@@ -26,5 +26,13 @@ public class InventoryListener implements Listener {
 			}
 			e.setCancelled(true);
 		}
+		if(e.getInventory().getTitle().equalsIgnoreCase("Towns")) {
+			if(e.getCurrentItem().getType() == Material.COMPASS) {
+				Player p = (Player) e.getWhoClicked();
+				p.sendMessage("ß6Schreibe in den Chat, wie deine Stadt heiﬂen soll.");
+				p.closeInventory();
+			}
+			e.setCancelled(true);
+		}
 	}
 }

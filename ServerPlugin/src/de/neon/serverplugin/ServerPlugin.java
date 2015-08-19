@@ -1,6 +1,8 @@
 package de.neon.serverplugin;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import me.clip.deluxechat.placeholders.DeluxePlaceholderHook;
 import me.clip.deluxechat.placeholders.PlaceholderHandler;
@@ -16,26 +18,38 @@ import de.neon.serverplugin.actionbar.Actionbar;
 import de.neon.serverplugin.command.DuelCommand;
 import de.neon.serverplugin.command.StatsCommand;
 import de.neon.serverplugin.command.TeleportCommand;
+import de.neon.serverplugin.command.TeleportHereCommand;
+import de.neon.serverplugin.command.TownCommand;
+import de.neon.serverplugin.listener.ChatListener;
 import de.neon.serverplugin.listener.DuelListener;
 import de.neon.serverplugin.listener.InventoryListener;
 import de.neon.serverplugin.listener.JoinLeaveListener;
 import de.neon.serverplugin.listener.XPListener;
+import de.neon.serverplugin.town.Town;
 
 public class ServerPlugin extends JavaPlugin {
 	
 	public static File dataFolder = null;
 	public static File players = null;
+	public static File town = null;
 	public static Actionbar bar = new Actionbar();
 	public static int pluginTickRate = 10;
+	
+	public static List<Town> towns = new ArrayList<Town>();
+	public static List<Player> create = new ArrayList<Player>();
 	
 	public void onLoad() {
 		dataFolder = this.getDataFolder();
 		players = new File(dataFolder+"/players/");
+		town = new File(dataFolder+"/towns/");
 		if(!dataFolder.exists()) {
 			dataFolder.mkdirs();
 		}
 		if(!players.exists()) {
 			players.mkdirs();
+		}
+		if(!town.exists()) {
+			town.mkdirs();
 		}
 		DataUtil.init();
 	}
@@ -45,14 +59,17 @@ public class ServerPlugin extends JavaPlugin {
 		
 		DeluxChatHook();
 		
+		
 		Bukkit.getPluginCommand("duel").setExecutor(new DuelCommand(this));
 		Bukkit.getPluginCommand("stats").setExecutor(new StatsCommand());
 		Bukkit.getPluginCommand("teleport").setExecutor(new TeleportCommand());
-		Bukkit.getPluginCommand("teleporthere").setExecutor(new TeleportCommand());
+		Bukkit.getPluginCommand("teleporthere").setExecutor(new TeleportHereCommand());
+		Bukkit.getPluginCommand("town").setExecutor(new TownCommand());
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
 		Bukkit.getPluginManager().registerEvents(new DuelListener(), this);
 		Bukkit.getPluginManager().registerEvents(new XPListener(), this);
 		Bukkit.getPluginManager().registerEvents(new JoinLeaveListener(), this);
+		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 		public void run() {
 				for(Player p : Bukkit.getOnlinePlayers()) {
@@ -118,6 +135,8 @@ public class ServerPlugin extends JavaPlugin {
 					
 					
 				}
+				
+				towns = TownUtil.getTowns();
 			}
 		}, 0, pluginTickRate);
 	}

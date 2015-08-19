@@ -19,3 +19,7 @@ commands:
     discription: Teleport someone to you.
     aliases: [tphere, tph]
     usage: </teleporthere> (Player1)
+  town:
+    discription: Control your town
+    aliases: [t]
+    usage: </town>

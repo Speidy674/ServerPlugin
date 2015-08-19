@@ -33,6 +33,8 @@ public class DataUtil {
 		exampleConfig.addDefault("skillpoints", 0);
 		exampleConfig.addDefault("wins", 0);
 		exampleConfig.addDefault("loses", 0);
+		exampleConfig.addDefault("ownsTown", false);
+		exampleConfig.addDefault("town", "null");
 		try {
 			exampleConfig.save(file);
 		} catch (IOException e) {
