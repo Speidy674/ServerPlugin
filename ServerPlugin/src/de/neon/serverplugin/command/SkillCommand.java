@@ -34,6 +34,8 @@ public class SkillCommand implements CommandExecutor {
 					List<IChatBaseComponent> pages = (List<IChatBaseComponent>) pagesField.get(meta);
 					if(DataUtil.geti(p, "skillpoints") > 0) {
 						pages.add(ChatSerializer.a(""));
+					} else {
+						
 					}
 				} catch(Exception e) {
 					e.printStackTrace();
