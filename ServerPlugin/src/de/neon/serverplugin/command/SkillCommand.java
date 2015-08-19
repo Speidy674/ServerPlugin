@@ -24,7 +24,7 @@ public class SkillCommand implements CommandExecutor {
 			if(cmd.getName().equalsIgnoreCase("skill")) {
 				try {
 					if(DataUtil.geti(p, "skillpoints") > 0) {
-						p.getInventory().setItem(39, getBook(p));
+						p.getInventory().addItem(getBook(p));
 					} else {
 						
 					}
