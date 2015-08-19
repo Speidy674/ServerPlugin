@@ -9,7 +9,7 @@ public class JoinLeaveListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerJoinEvent e) {
-		String msg = "§7[§a+§7]§6"+e.getPlayer().getName();
+		String msg = "§7[§a+§7] §6"+e.getPlayer().getName();
 		e.setJoinMessage(msg);
 		if(!e.getPlayer().hasPlayedBefore()) {
 			e.getPlayer().performCommand("skill");
@@ -18,7 +18,7 @@ public class JoinLeaveListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerLeave(PlayerQuitEvent e) {
-		String msg = "§7[§c-§7]§6"+e.getPlayer().getName();
+		String msg = "§7[§c-§7] §6"+e.getPlayer().getName();
 		e.setQuitMessage(msg);
 		
 	}
