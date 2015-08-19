@@ -20,7 +20,6 @@ import de.neon.serverplugin.DataUtil;
 public class SkillCommand implements CommandExecutor {
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
 		if(s instanceof Player) {
 			Player p = (Player) s;
