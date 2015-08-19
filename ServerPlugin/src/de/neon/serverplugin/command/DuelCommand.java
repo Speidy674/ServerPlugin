@@ -57,9 +57,7 @@ public class DuelCommand implements CommandExecutor {
 						return true;
 					}
 					Util.inviteList.remove(p);
-					
-					final Location hololoc = p.getLocation();
-					hololoc.setY(hololoc.getY()+5);
+				
 					
 					Util.displayTitleBar(p, "§65..", "", 2, 16 , 2);
 					Util.displayTitleBar(target, "§65..", "", 2, 16 , 2);
@@ -115,23 +113,34 @@ public class DuelCommand implements CommandExecutor {
 					taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 						public void run() {
 							
+							final Location hololoc1 = p.getLocation();
+							hololoc1.setY(hololoc1.getY()+2);
+							
+							final Location hololoc2 = target.getLocation();
+							hololoc2.setY(hololoc2.getY()+2);
+							
 							List<String> lines = new ArrayList<String>();
-	                        lines.add("§4[§cDuel]§4");
+	                        lines.add("§4[§cDuel§4]");
 	                        lines.add("§b"+target.getName() +" §4VS §b"+p.getName());
-	                       
-	                        Hologram hologram = new Hologram();
-	                        hologram.setLines(lines);
-	                        hologram.setLocation(hololoc);
-	                        hologram.setHeight(0.8D);
-	                       
-	                        hologram.spawntemp(20);
+	                        
+	                        Hologram hologram1 = new Hologram();
+	                        hologram1.setLines(lines);
+	                        hologram1.setLocation(hololoc1);
+	                        hologram1.setHeight(1.0D);
+	                        hologram1.spawntemp(10);
+	                        
+	                        Hologram hologram2 = new Hologram();
+	                        hologram2.setLines(lines);
+	                        hologram2.setLocation(hololoc2);
+	                        hologram2.setHeight(1.0D);
+	                        hologram2.spawntemp(10);
 	                        
 	                        if(!Util.duelList.containsKey(p)){
 	                        	cancelTask();
 	                        }
 						}
 						
-					}, 100, 20);
+					}, 100, 10);
 					return true;
 				}
 				if(args[0].equalsIgnoreCase("decline")) {
