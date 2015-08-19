@@ -1,8 +1,13 @@
 package de.neon.serverplugin.command;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import javax.print.CancelablePrintJob;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,6 +16,7 @@ import org.bukkit.entity.Player;
 
 import de.neon.serverplugin.ServerPlugin;
 import de.neon.serverplugin.Util;
+import de.neon.serverplugin.hologram.Hologram;
 import de.neon.serverplugin.json.JSONChatClickEventType;
 import de.neon.serverplugin.json.JSONChatColor;
 import de.neon.serverplugin.json.JSONChatExtra;
@@ -21,6 +27,7 @@ import de.neon.serverplugin.json.JSONChatMessage;
 public class DuelCommand implements CommandExecutor {
 
 	public static ServerPlugin plugin;
+	private int taskID = -1;
 	
 	public DuelCommand(ServerPlugin plugin) {
 		this.plugin = plugin;
@@ -50,6 +57,10 @@ public class DuelCommand implements CommandExecutor {
 						return true;
 					}
 					Util.inviteList.remove(p);
+					
+					final Location hololoc = p.getLocation();
+					hololoc.setY(hololoc.getY()+5);
+					
 					Util.displayTitleBar(p, "§65..", "", 2, 16 , 2);
 					Util.displayTitleBar(target, "§65..", "", 2, 16 , 2);
 					p.playSound(p.getLocation(), Sound.ITEM_PICKUP, 0.5f, 1.0f);
@@ -101,6 +112,26 @@ public class DuelCommand implements CommandExecutor {
 							target.playSound(target.getLocation(), Sound.ORB_PICKUP, 1.5f, 1.0f);
 						}
 					}, 103);
+					taskID = Bukkit.getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
+						public void run() {
+							
+							List<String> lines = new ArrayList<String>();
+	                        lines.add("§4[§cDuel]§4");
+	                        lines.add("§b"+target.getName() +" §4VS §b"+p.getName());
+	                       
+	                        Hologram hologram = new Hologram();
+	                        hologram.setLines(lines);
+	                        hologram.setLocation(hololoc);
+	                        hologram.setHeight(0.8D);
+	                       
+	                        hologram.spawntemp(20);
+	                        
+	                        if(!Util.duelList.containsKey(p)){
+	                        	cancelTask();
+	                        }
+						}
+						
+					}, 100, 20);
 					return true;
 				}
 				if(args[0].equalsIgnoreCase("decline")) {
@@ -170,5 +201,9 @@ public class DuelCommand implements CommandExecutor {
 	public void sendHelp(Player p) {
 		p.sendMessage("§6/duel §ahelp §b- §fGucke dir die Hilfeseite an.");
 		p.sendMessage("§6/duel §ainvite §b- §fStelle jemanden eine Duellanfrage.");
+	}
+	
+	private void cancelTask() {
+		Bukkit.getScheduler().cancelTask(taskID);
 	}
 }
