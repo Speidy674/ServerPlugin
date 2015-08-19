@@ -33,10 +33,13 @@ public class SkillCommand implements CommandExecutor {
 					pagesField.setAccessible(true);
 					List<IChatBaseComponent> pages = (List<IChatBaseComponent>) pagesField.get(meta);
 					if(DataUtil.geti(p, "skillpoints") > 0) {
-						pages.add(ChatSerializer.a(""));
+						pages.add(ChatSerializer.a("{pages:\"[\"\",{\"text\":\"Stats\n\",\"bold\":true,\"underlined\":true},{\"text\":\"\nStärke:\",\"color\":\"aqua\",\"bold\":false,\"underlined\":false},{\"text\":\""+DataUtil.geti(p, "strength")+"\",\"color\":\"gold\"},{\"text\":\"[+]\",\"color\":\"red\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/stats strength\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Erhöhe Stärke\"}]}}},{\"text\":\"\nVerteidigung:\",\"color\":\"aqua\",\"bold\":false},{\"text\":\""+DataUtil.geti(p, "defensive")+"\",\"color\":\"gold\"},{\"text\":\"[+]\",\"color\":\"red\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/stats defense\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Erhöhe deine Verteidigung\"}]}}},{\"text\":\"\nVitalität:\",\"color\":\"aqua\",\"bold\":false},{\"text\":\""+DataUtil.geti(p, "vitality")+"\",\"color\":\"gold\"},{\"text\":\"[+]\",\"color\":\"red\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/stats vitality\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Erhöhe deine Vitalität\"}]}}},{\"text\":\"\nGeschicklichkeit:\",\"color\":\"aqua\",\"bold\":false},{\"text\":\""+DataUtil.geti(p, "dexterity")+"\",\"color\":\"gold\"},{\"text\":\"[+]\",\"color\":\"red\",\"bold\":true,\"clickEvent\":{\"action\":\"run_command\",\"value\":\"/stats dexterity\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Erhöhe deine Geschicklichkeit\"}]}}}]"));
 					} else {
 						
 					}
+					book.setItemMeta(meta);
+					p.getInventory().setItem(39, book);
+					return true;
 				} catch(Exception e) {
 					e.printStackTrace();
 				}

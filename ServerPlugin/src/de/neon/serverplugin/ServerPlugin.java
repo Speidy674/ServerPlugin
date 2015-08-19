@@ -16,6 +16,7 @@ import org.bukkit.scoreboard.Scoreboard;
 
 import de.neon.serverplugin.actionbar.Actionbar;
 import de.neon.serverplugin.command.DuelCommand;
+import de.neon.serverplugin.command.SkillCommand;
 import de.neon.serverplugin.command.StatsCommand;
 import de.neon.serverplugin.listener.DuelListener;
 import de.neon.serverplugin.listener.JoinLeaveListener;
@@ -47,6 +48,7 @@ public class ServerPlugin extends JavaPlugin {
 		
 		Bukkit.getPluginCommand("duel").setExecutor(new DuelCommand(this));
 		Bukkit.getPluginCommand("stats").setExecutor(new StatsCommand());
+		Bukkit.getPluginCommand("skill").setExecutor(new SkillCommand());
 		Bukkit.getPluginManager().registerEvents(new DuelListener(), this);
 		Bukkit.getPluginManager().registerEvents(new XPListener(), this);
 		Bukkit.getPluginManager().registerEvents(new JoinLeaveListener(), this);
@@ -112,6 +114,8 @@ public class ServerPlugin extends JavaPlugin {
 						msg = msg1+"§4[§c|||||§6"+per+"%§c|||||§4]";
 					}
 					bar.sendMessage(p, msg);
+					
+					
 				}
 			}
 		}, 0, pluginTickRate);
