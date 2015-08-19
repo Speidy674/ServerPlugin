@@ -11,3 +11,7 @@ commands:
   stats:
     discription: View/Skill your stats.
     usage: </stats>
+  teleport:
+    discription: Teleport yourself.
+    aliases: [tp]
+    usage: </teleport> (Player1) (Player2)

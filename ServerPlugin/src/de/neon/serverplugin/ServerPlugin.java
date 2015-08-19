@@ -15,6 +15,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import de.neon.serverplugin.actionbar.Actionbar;
 import de.neon.serverplugin.command.DuelCommand;
 import de.neon.serverplugin.command.StatsCommand;
+import de.neon.serverplugin.command.TeleportCommand;
 import de.neon.serverplugin.listener.DuelListener;
 import de.neon.serverplugin.listener.JoinLeaveListener;
 import de.neon.serverplugin.listener.XPListener;
@@ -45,6 +46,7 @@ public class ServerPlugin extends JavaPlugin {
 		
 		Bukkit.getPluginCommand("duel").setExecutor(new DuelCommand(this));
 		Bukkit.getPluginCommand("stats").setExecutor(new StatsCommand());
+		Bukkit.getPluginCommand("teleport").setExecutor(new TeleportCommand());
 		Bukkit.getPluginManager().registerEvents(new DuelListener(), this);
 		Bukkit.getPluginManager().registerEvents(new XPListener(), this);
 		Bukkit.getPluginManager().registerEvents(new JoinLeaveListener(), this);
