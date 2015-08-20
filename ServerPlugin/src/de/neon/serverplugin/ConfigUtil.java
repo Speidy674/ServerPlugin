@@ -27,6 +27,9 @@ public class ConfigUtil {
 		exampleConfig.options().header("Do not change any value here unless you know, what you are doing.");
 		exampleConfig.addDefault("join", "§7[§a+§7] §6%player%");
 		exampleConfig.addDefault("quit", "§7[§c-§7] §6%player%");
+		exampleConfig.addDefault("towns.maxMembers", 60);
+		exampleConfig.addDefault("towns.sizeX", 30);
+		exampleConfig.addDefault("towns.sizeZ", 30);
 		try {
 			exampleConfig.save(file);
 		} catch (IOException e) {
