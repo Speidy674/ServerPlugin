@@ -8,6 +8,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
+import de.neon.serverplugin.ServerPlugin;
 import de.neon.serverplugin.TownUtil;
 import de.neon.serverplugin.town.Town;
 
@@ -17,7 +18,8 @@ public class MoveListener implements Listener {
 	public void onMove(PlayerMoveEvent e) {
 		Town town = TownUtil.isInTown(e.getTo().getX(), e.getTo().getZ());
 		Player p = e.getPlayer();
-		if(town != null) {
+		if(town != null && !ServerPlugin.inTown.contains(p)) {
+			ServerPlugin.inTown.add(p);
 			String msg = town.getWelcome();
 			Calendar cal = Calendar.getInstance();
 			msg = msg.replaceAll("%player%", p.getName());
@@ -27,7 +29,8 @@ public class MoveListener implements Listener {
 			p.sendMessage(msg);
 		}
 		Town town_ = TownUtil.isInTown(e.getFrom().getX(), e.getFrom().getZ());
-		if(town_ != null && town == null) {
+		if(town_ != null && town == null && ServerPlugin.inTown.contains(p)) {
+			ServerPlugin.inTown.remove(p);
 			String msg = town_.getAdoption();
 			Calendar cal = Calendar.getInstance();
 			msg = msg.replaceAll("%player%", p.getName());
