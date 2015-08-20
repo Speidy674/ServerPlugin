@@ -35,6 +35,16 @@ public class TownCommand implements CommandExecutor {
 						p.sendMessage("§6Du lädst nun niemanden ein.");
 						return true;
 					}
+					if(ServerPlugin.welcome.contains(p)) {
+						ServerPlugin.welcome.remove(p);
+						p.sendMessage("§6Du änderst nun nicht mehr die Willkommens Nachricht.");
+						return true;
+					}
+					if(ServerPlugin.adoption.contains(p)) {
+						ServerPlugin.adoption.remove(p);
+						p.sendMessage("§6Du änderst nun nicht mehr die Verabschiedungs Nachricht.");
+						return true;
+					}
 					if(!TownUtil.isInTown(p)) {
 						sendCreateNewTownGUI(p);
 						return true;
@@ -54,6 +64,11 @@ public class TownCommand implements CommandExecutor {
 							p.sendMessage("§4Du hast keine laufende Anfrage");
 							return true;
 						} else {
+							if(!TownUtil.exists(Util.townInviteList.get(p).getName())) {
+								p.sendMessage("§4Die Stadt wurde gelöscht.");
+								Util.townInviteList.remove(p);
+								return true;
+							}
 							Town town = Util.townInviteList.get(p);
 							town.addMember(p.getName());
 							p.sendMessage("§aDu bist jetzt ein Bewohner der Stadt §b"+town.getName()+"§a.");
@@ -87,7 +102,7 @@ public class TownCommand implements CommandExecutor {
 	
 	private void sendMemberGUI(Player p) {
 		Inventory inv = Bukkit.createInventory(p, 9, "Towns");
-		ItemStack leave = new ItemStack(Material.TNT);
+		ItemStack leave = new ItemStack(Material.BARRIER);
 		ItemMeta leaveMeta = leave.getItemMeta();
 		leaveMeta.setDisplayName("§cVerlasse deine Stadt");
 		leave.setItemMeta(leaveMeta);

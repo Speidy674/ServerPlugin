@@ -25,6 +25,7 @@ import de.neon.serverplugin.listener.ChatListener;
 import de.neon.serverplugin.listener.DuelListener;
 import de.neon.serverplugin.listener.InventoryListener;
 import de.neon.serverplugin.listener.JoinLeaveListener;
+import de.neon.serverplugin.listener.MoveListener;
 import de.neon.serverplugin.listener.XPListener;
 import de.neon.serverplugin.town.Town;
 
@@ -39,6 +40,8 @@ public class ServerPlugin extends JavaPlugin {
 	public static List<Town> towns = new ArrayList<Town>();
 	public static List<Player> create = new ArrayList<Player>();
 	public static List<Player> invite = new ArrayList<Player>();
+	public static List<Player> welcome = new ArrayList<Player>();
+	public static List<Player> adoption = new ArrayList<Player>();
 	
 	public void onLoad() {
 		dataFolder = this.getDataFolder();
@@ -73,6 +76,7 @@ public class ServerPlugin extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new XPListener(), this);
 		Bukkit.getPluginManager().registerEvents(new JoinLeaveListener(), this);
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
+		Bukkit.getPluginManager().registerEvents(new MoveListener(), this);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 		public void run() {
 				ConfigUtil.correctConfig();
@@ -81,6 +85,7 @@ public class ServerPlugin extends JavaPlugin {
 						DataUtil.createNewData(p);
 					} else {
 						if(!DataUtil.hasNewestAccount(p)) {
+							System.out.println("!");
 							DataUtil.correctAccount(p);
 						}
 					}

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.entity.Player;
 
 public class ConfigUtil {
 
@@ -57,12 +56,12 @@ public class ConfigUtil {
 		
 		
 	}
-	
+
 	public static FileConfiguration getConfig() {
 		File file = new File(ServerPlugin.dataFolder+"/config.yml");
 		return YamlConfiguration.loadConfiguration(file);
 	}
-	
+
 	public static void setConfig(FileConfiguration config) {
 		File file = new File(ServerPlugin.dataFolder+"/config.yml");
 		try {

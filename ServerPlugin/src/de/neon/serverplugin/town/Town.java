@@ -4,9 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
+import de.neon.serverplugin.DataUtil;
 import de.neon.serverplugin.ServerPlugin;
 
 public class Town {
@@ -17,15 +19,19 @@ public class Town {
 	
 	private String owner;
 	private String name;
+	private String welcome;
+	private String adoption;
 	private ArrayList<String> members;
 	private double minX;
 	private double maxX;
 	private double minZ;
 	private double maxZ;
 	
-	public Town(String owner, String name, double minX, double maxX, double minZ, double maxZ, ArrayList<String> members) {
+	public Town(String owner, String name, String welcome, String adoption, double minX, double maxX, double minZ, double maxZ, ArrayList<String> members) {
 		this.owner = owner;
 		this.name = name;
+		this.welcome = welcome;
+		this.adoption = adoption;
 		this.members = members;
 		this.minX = minX;
 		this.maxX = maxX;
@@ -33,6 +39,22 @@ public class Town {
 		this.maxZ = maxZ;
 	}
 	
+	public String getWelcome() {
+		return welcome;
+	}
+
+	public void setWelcome(String welcome) {
+		this.welcome = welcome;
+	}
+
+	public String getAdoption() {
+		return adoption;
+	}
+
+	public void setAdoption(String adoption) {
+		this.adoption = adoption;
+	}
+
 	public void addMember(String s) {
 		members.add(s);
 		File file = new File(ServerPlugin.town+"/"+name+".yml");
@@ -48,6 +70,17 @@ public class Town {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void delete() {
+		File file = new File(ServerPlugin.town+"/"+name+".yml");
+		for(String member : members) {
+			DataUtil.set(Bukkit.getOfflinePlayer(member), "town", "null");
+		}
+		DataUtil.set(Bukkit.getPlayer(owner), "town", "null");
+		DataUtil.set(Bukkit.getPlayer(owner), "ownsTown", false);
+		file.delete();
 	}
 	
 	public void removeMember(String s) {

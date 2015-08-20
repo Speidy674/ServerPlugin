@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -58,6 +59,20 @@ public class DataUtil {
 		}
 		savePlayerData(config, p);
 	}
+	
+	public static FileConfiguration getPlayerData(OfflinePlayer p) {
+		File file = new File(ServerPlugin.players + "/"+p.getUniqueId()+".yml");
+		return YamlConfiguration.loadConfiguration(file);
+	}
+
+	public static void savePlayerData(FileConfiguration config, OfflinePlayer p) {
+		File file = new File(ServerPlugin.players + "/"+p.getUniqueId()+".yml");
+		try {
+			config.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	public static FileConfiguration getPlayerData(Player p) {
 		File file = new File(ServerPlugin.players + "/"+p.getUniqueId()+".yml");
@@ -80,8 +95,8 @@ public class DataUtil {
 	
 	public static boolean hasNewestAccount(Player p) {
 		FileConfiguration config = getPlayerData(p);
-		Map<String, Object> index1 = exampleConfig.getValues(true);
-		Map<String, Object> index2 = config.getValues(true);
+		Map<String, Object> index1 = exampleConfig.getValues(false);
+		Map<String, Object> index2 = config.getValues(false);
 		for(String s : index1.keySet()) {
 			if(!index2.containsKey(s)) {
 				return false;
@@ -93,8 +108,8 @@ public class DataUtil {
 	public static void correctAccount(Player p) {
 		FileConfiguration config = getPlayerData(p);
 		config.options().copyDefaults(true);
-		Map<String, Object> index1 = exampleConfig.getValues(true);
-		Map<String, Object> index2 = config.getValues(true);
+		Map<String, Object> index1 = exampleConfig.getValues(false);
+		Map<String, Object> index2 = config.getValues(false);
 		for(String s : index1.keySet()) {
 			if(!index2.containsKey(s)) {
 				config.addDefault(s, index2.get(s));
@@ -129,6 +144,12 @@ public class DataUtil {
 	}
 	
 	public static void set(Player p, String source, Object value) {
+		FileConfiguration config = getPlayerData(p);
+		config.set(source, value);
+		savePlayerData(config, p);
+	}
+	
+	public static void set(OfflinePlayer p, String source, Object value) {
 		FileConfiguration config = getPlayerData(p);
 		config.set(source, value);
 		savePlayerData(config, p);

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -55,13 +57,33 @@ public class TownUtil {
 		double maxX = config.getDouble("maxX");
 		double minZ = config.getDouble("minZ");
 		double maxZ = config.getDouble("maxZ");
+		String welcome = config.getString("welcome");
+		String adoption = config.getString("adoption");
 		ArrayList<String> members = new ArrayList<String>();
 		for(int i = 0; i < Town.MAX_MEMBERS; i++) {
 			if(!config.getString("member"+i).equals("null")) {
 				members.add(config.getString("member"+i));
 			}
 		}
-		return new Town(owner, name, minX, maxX, minZ, maxZ, members);
+		return new Town(owner, name, welcome, adoption, minX, maxX, minZ, maxZ, members);
+	}
+	
+	public static Town isInTown(double x, double z) {
+		for(Town town : getTowns()) {
+			File file = new File(ServerPlugin.town + "/" + town.getName() + ".yml");
+			FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+			double minX = config.getDouble("minX");
+			double maxX = config.getDouble("maxX");
+			double minZ = config.getDouble("minZ");
+			double maxZ = config.getDouble("maxZ");
+			if(x >= minX 
+			&& x <= maxX
+			&& z >= minZ
+			&& z <= maxZ) {
+				return town;
+			}
+		}
+		return null;
 	}
 	
 	public static ArrayList<Town> getTowns() {
@@ -71,6 +93,17 @@ public class TownUtil {
 			towns.add(getTown(file));
 		}
 		return towns;
+	}
+	
+	public static void sendMessageToTown(Town town, String message) {
+		for(String s : town.getMembers()) {
+			if(Bukkit.getPlayer(s) != null) {
+				Bukkit.getPlayer(s).sendMessage(message);
+			}
+		}
+		if(Bukkit.getPlayer(town.getOwner()) != null) {
+			Bukkit.getPlayer(town.getOwner()).sendMessage(message);
+		}
 	}
 	
 	public static boolean exists(String name) {
@@ -92,6 +125,8 @@ public class TownUtil {
 		config.options().header("Do not change any value here unless you know, what you are doing.");
 		config.addDefault("name", name);
 		config.addDefault("owner", owner);
+		config.addDefault("welcome", "&aHallo %player% in der Stadt %town%!");
+		config.addDefault("welcome", "&cTschüss, %player%!");
 		config.addDefault("minX", minX);
 		config.addDefault("minZ", minZ);
 		config.addDefault("maxX", maxX);
