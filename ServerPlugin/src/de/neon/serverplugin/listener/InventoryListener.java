@@ -44,7 +44,7 @@ public class InventoryListener implements Listener {
 				Player p = (Player) e.getWhoClicked();
 				p.closeInventory();
 				int size = ((TownUtil.getTown(p).getMembers().size()) / 9) * 9 + 9;
-				Inventory inv = Bukkit.createInventory(p, size, "Teleport-Menü");
+				Inventory inv = Bukkit.createInventory(p, size, "Bewohner");
 				for(String player : TownUtil.getTown(p).getMembers()) {
 					ItemStack item = new ItemStack(Material.SKULL_ITEM);
 					SkullMeta meta = (SkullMeta) item.getItemMeta();

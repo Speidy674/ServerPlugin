@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import de.neon.serverplugin.DataUtil;
 import de.neon.serverplugin.ServerPlugin;
@@ -85,12 +86,29 @@ public class TownCommand implements CommandExecutor {
 	}
 	
 	private void sendMemberGUI(Player p) {
-		
+		Inventory inv = Bukkit.createInventory(p, 9, "Towns");
+		ItemStack leave = new ItemStack(Material.TNT);
+		ItemMeta leaveMeta = leave.getItemMeta();
+		leaveMeta.setDisplayName("§cVerlasse deine Stadt");
+		leave.setItemMeta(leaveMeta);
+		ItemStack member = new ItemStack(Material.SKULL_ITEM);
+		ItemMeta memberMeta = member.getItemMeta();
+		memberMeta.setDisplayName("§bZeige dir die Stadtbewohner Liste");
+		member.setItemMeta(memberMeta);
+		ItemStack owner = new ItemStack(Material.SKULL_ITEM);
+		SkullMeta ownerMeta = (SkullMeta) owner.getItemMeta();
+		owner.setDurability((short) 3);
+		ownerMeta.setDisplayName("§6Owner: "+TownUtil.getTown(p).getOwner());
+		owner.setItemMeta(ownerMeta);
+		inv.addItem(member);
+		inv.addItem(owner);
+		inv.setItem(8, leave);
+		p.openInventory(inv);
 	}
 	
 	private void sendOwnerGUI(Player p) {
 		Inventory inv = Bukkit.createInventory(p, 9, "Towns");
-		ItemStack delete = new ItemStack(Material.FIRE);
+		ItemStack delete = new ItemStack(Material.TNT);
 		ItemMeta deleteMeta = delete.getItemMeta();
 		deleteMeta.setDisplayName("§4Lösche deine Stadt");
 		delete.setItemMeta(deleteMeta);
@@ -114,7 +132,7 @@ public class TownCommand implements CommandExecutor {
 		inv.addItem(invite);
 		inv.addItem(welcome);
 		inv.addItem(adoption);
-		inv.addItem(delete);
+		inv.setItem(8, delete);
 		p.openInventory(inv);
 	}
 

@@ -57,7 +57,7 @@ public class TownUtil {
 		double maxZ = config.getDouble("maxZ");
 		ArrayList<String> members = new ArrayList<String>();
 		for(int i = 0; i < Town.MAX_MEMBERS; i++) {
-			if(!config.getString("member"+i).equals("")) {
+			if(!config.getString("member"+i).equals("null")) {
 				members.add(config.getString("member"+i));
 			}
 		}
