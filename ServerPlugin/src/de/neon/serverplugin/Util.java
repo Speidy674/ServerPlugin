@@ -11,9 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
+import de.neon.serverplugin.town.Town;
+
 public class Util {
 
-	public static Map<Player, Player> inviteList = new HashMap<Player, Player>();
+	public static Map<Player, Player> duelInviteList = new HashMap<Player, Player>();
+	public static Map<Player, Town> townInviteList = new HashMap<Player, Town>();
 	public static Map<Player, Player> duelList = new HashMap<Player, Player>();
 	
 	public static final double XP_SCALE = 1.8;

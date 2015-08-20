@@ -45,17 +45,17 @@ public class DuelCommand implements CommandExecutor {
 					return true;
 				}
 				if(args[0].equalsIgnoreCase("accept")) {
-					if(!Util.inviteList.containsKey(p)) {
+					if(!Util.duelInviteList.containsKey(p)) {
 						p.sendMessage("§4Du hast keine Duellanfragen.");
 						return true;
 					}
-					final Player target = Util.inviteList.get(p);
+					final Player target = Util.duelInviteList.get(p);
 					if(!target.isOnline()) {
 						p.sendMessage("§4"+target.getName()+" ist nicht mehr online.");
 						p.performCommand("duel decline");
 						return true;
 					}
-					Util.inviteList.remove(p);
+					Util.duelInviteList.remove(p);
 				
 					
 					Util.displayTitleBar(p, "§65..", "", 2, 16 , 2);
@@ -143,14 +143,14 @@ public class DuelCommand implements CommandExecutor {
 					return true;
 				}
 				if(args[0].equalsIgnoreCase("decline")) {
-					if(!Util.inviteList.containsKey(p)) {
+					if(!Util.duelInviteList.containsKey(p)) {
 						p.sendMessage("§4Du hast keine Duellanfragen.");
 						return true;
 					}
-					Player target = Util.inviteList.get(p);
+					Player target = Util.duelInviteList.get(p);
 					p.sendMessage("§6Du hast die Duellanfrage von §b"+target.getName()+" §6abgelehnt.");
 					target.sendMessage("§b"+p.getName()+" §6hat deine Duellanfrage abgelehnt.");
-					Util.inviteList.remove(p);
+					Util.duelInviteList.remove(p);
 					return true;
 				}
 			}
@@ -165,11 +165,11 @@ public class DuelCommand implements CommandExecutor {
 						p.sendMessage("§4Der Spieler "+args[1]+" ist nicht online.");
 						return true;
 					}
-					if(Util.inviteList.containsKey(p) || Util.inviteList.containsValue(p)) {
+					if(Util.duelInviteList.containsKey(p) || Util.duelInviteList.containsValue(p)) {
 						p.sendMessage("§4Du kannst nicht in 2 Duellen gleichzeigt sein.");
 						return true;
 					}
-					if(Util.inviteList.containsKey(target) || Util.inviteList.containsValue(target)) {
+					if(Util.duelInviteList.containsKey(target) || Util.duelInviteList.containsValue(target)) {
 						p.sendMessage("§4"+target.getName()+" ist bereits in einem Duell.");
 						return true;
 					}
@@ -181,7 +181,7 @@ public class DuelCommand implements CommandExecutor {
 						p.sendMessage("§4"+target.getName()+" ist bereits in einem Duell.");
 						return true;
 					}
-					Util.inviteList.put(target, p);
+					Util.duelInviteList.put(target, p);
 					p.sendMessage("§6Du hast §b"+target.getName()+" §6zu einem Duell herrausgefordert.");
 					target.sendMessage("§b"+p.getName()+" §6hat dich zu einem Duell herrausgefordert.");
 					JSONChatMessage messageA = new JSONChatMessage("Um die Anfrage anzunehmen, klicke ", JSONChatColor.GOLD, null);

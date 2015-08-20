@@ -24,6 +24,26 @@ public class TownUtil {
 		return ownsTown(p) || isMemberInTown(p);
 	}
 	
+	public static Town getTown(Player p) {
+		if(ownsTown(p)) {
+			for(Town t : getTowns()) {
+				if(t.getOwner().equals(p.getName())) {
+					return t;
+				}
+			}
+		}
+		if(isMemberInTown(p)) {
+			for(Town t : getTowns()) {
+				for(String s : t.getMembers()) {
+					if(s.equals(p.getName())) {
+						return t;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
 	public static Town getTown(File file) {
 		if(!file.exists()) {
 			return null;

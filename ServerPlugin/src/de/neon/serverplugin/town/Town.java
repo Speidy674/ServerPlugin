@@ -1,6 +1,13 @@
 package de.neon.serverplugin.town;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
+
+import de.neon.serverplugin.ServerPlugin;
 
 public class Town {
 
@@ -24,6 +31,42 @@ public class Town {
 		this.maxX = maxX;
 		this.minZ = minZ;
 		this.maxZ = maxZ;
+	}
+	
+	public void addMember(String s) {
+		members.add(s);
+		File file = new File(ServerPlugin.town+"/"+name+".yml");
+		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+		for(int i = 0; i < MAX_MEMBERS; i++) {
+			if(config.getString("member"+i).equals("")) {
+				config.set("members"+i, s);
+			}
+		}
+		try {
+			config.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void removeMember(String s) {
+		members.remove(s);
+		File file = new File(ServerPlugin.town+"/"+name+".yml");
+		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
+		for(int i = 0; i < MAX_MEMBERS; i++) {
+			if(config.getString("member"+i).equals(s)) {
+				config.set("members"+i, "");
+			}
+		}
+		try {
+			config.save(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public boolean isMember(String s) {
+		return members.contains(s);
 	}
 
 	public ArrayList<String> getMembers() {

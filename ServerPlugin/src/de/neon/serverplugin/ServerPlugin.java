@@ -38,6 +38,7 @@ public class ServerPlugin extends JavaPlugin {
 	
 	public static List<Town> towns = new ArrayList<Town>();
 	public static List<Player> create = new ArrayList<Player>();
+	public static List<Player> invite = new ArrayList<Player>();
 	
 	public void onLoad() {
 		dataFolder = this.getDataFolder();
