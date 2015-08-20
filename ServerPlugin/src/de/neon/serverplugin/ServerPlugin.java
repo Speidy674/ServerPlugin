@@ -52,6 +52,7 @@ public class ServerPlugin extends JavaPlugin {
 			town.mkdirs();
 		}
 		DataUtil.init();
+		ConfigUtil.init();
 	}
 	
 	public void onEnable() {
@@ -71,6 +72,7 @@ public class ServerPlugin extends JavaPlugin {
 		Bukkit.getPluginManager().registerEvents(new ChatListener(), this);
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
 		public void run() {
+				ConfigUtil.correctConfig();
 				for(Player p : Bukkit.getOnlinePlayers()) {
 					if(!DataUtil.hasAccount(p)) {
 						DataUtil.createNewData(p);
