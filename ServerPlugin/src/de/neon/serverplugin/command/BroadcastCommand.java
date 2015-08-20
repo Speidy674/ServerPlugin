@@ -28,6 +28,6 @@ public class BroadcastCommand implements CommandExecutor {
 				}
 			
 			}
-		return false;
+		return true;
 	}
 }
