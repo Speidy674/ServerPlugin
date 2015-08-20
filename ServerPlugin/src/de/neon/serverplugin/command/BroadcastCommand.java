@@ -12,6 +12,7 @@ import de.neon.serverplugin.ConfigUtil;
 public class BroadcastCommand implements CommandExecutor {
 
 	public boolean onCommand(CommandSender s, Command cmd, String label, String[] args) {
+		if(s instanceof Player) {
 			Player p = (Player) s;
 			if(cmd.getName().equalsIgnoreCase("broadcast")) {
 				if(p.hasPermission("serverolugin.broadcast")){
@@ -28,6 +29,15 @@ public class BroadcastCommand implements CommandExecutor {
 				}
 			
 			}
-		return true;
+		}else{
+			String msg = ConfigUtil.gets("broadcast")+"";
+			for (String arg : args){
+				msg = msg+" "+arg;
+			}
+			msg = ChatColor.translateAlternateColorCodes('&', msg);
+			Bukkit.broadcastMessage(msg);
+			return true;
+		}
+		return false;
 	}
 }
