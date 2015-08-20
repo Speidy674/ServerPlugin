@@ -23,3 +23,7 @@ commands:
     discription: Control your town
     aliases: [t]
     usage: </town>
+  broadcast:
+    discription: Broadcast a message
+    usage: </broadcast> (message)
+    permissions: serverolugin.broadcast

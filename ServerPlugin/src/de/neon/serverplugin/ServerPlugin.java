@@ -15,6 +15,7 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Scoreboard;
 
 import de.neon.serverplugin.actionbar.Actionbar;
+import de.neon.serverplugin.command.BroadcastCommand;
 import de.neon.serverplugin.command.DuelCommand;
 import de.neon.serverplugin.command.StatsCommand;
 import de.neon.serverplugin.command.TeleportCommand;
@@ -65,6 +66,7 @@ public class ServerPlugin extends JavaPlugin {
 		Bukkit.getPluginCommand("teleport").setExecutor(new TeleportCommand());
 		Bukkit.getPluginCommand("teleporthere").setExecutor(new TeleportHereCommand());
 		Bukkit.getPluginCommand("town").setExecutor(new TownCommand());
+		Bukkit.getPluginCommand("broadcast").setExecutor(new BroadcastCommand());
 		Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
 		Bukkit.getPluginManager().registerEvents(new DuelListener(), this);
 		Bukkit.getPluginManager().registerEvents(new XPListener(), this);
