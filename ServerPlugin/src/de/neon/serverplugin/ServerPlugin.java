@@ -59,7 +59,6 @@ public class ServerPlugin extends JavaPlugin {
 		
 		DeluxChatHook();
 		
-		
 		Bukkit.getPluginCommand("duel").setExecutor(new DuelCommand(this));
 		Bukkit.getPluginCommand("stats").setExecutor(new StatsCommand());
 		Bukkit.getPluginCommand("teleport").setExecutor(new TeleportCommand());

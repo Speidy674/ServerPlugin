@@ -11,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.neon.serverplugin.DataUtil;
 import de.neon.serverplugin.TownUtil;
 
 public class TownCommand implements CommandExecutor {
@@ -20,10 +21,11 @@ public class TownCommand implements CommandExecutor {
 			Player p = (Player) s;
 			if(cmd.getName().equalsIgnoreCase("town")) {
 				if(args.length == 0) {
-					System.out.println(TownUtil.isInTown(p));
 					if(!TownUtil.isInTown(p)) {
 						sendCreateNewTownGUI(p);
 						return true;
+					}else{
+						p.sendMessage("§4Du bist bereits in einer Stadt");
 					}
 				}
 			}
@@ -32,7 +34,7 @@ public class TownCommand implements CommandExecutor {
 	}
 	
 	private void sendCreateNewTownGUI(Player p) {
-		Inventory inv = Bukkit.createInventory(p, 6, "Towns");
+		Inventory inv = Bukkit.createInventory(p, 9, "Towns");
 		ItemStack stack = new ItemStack(Material.COMPASS);
 		ItemMeta meta = stack.getItemMeta();
 		meta.setDisplayName("§2Erstelle eine neue Stadt");

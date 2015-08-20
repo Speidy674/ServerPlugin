@@ -17,7 +17,6 @@ public class ChatListener implements Listener {
 		Player p = (Player) e.getPlayer();
 		if(ServerPlugin.create.contains(p)) {
 			e.setCancelled(true);
-			ServerPlugin.create.remove(p);
 			if(TownUtil.exists(e.getMessage())) {
 				p.sendMessage("§4Der Stadtname "+e.getMessage()+" ist schon vergeben.");
 			} else {
@@ -27,6 +26,7 @@ public class ChatListener implements Listener {
 				double maxZ = p.getLocation().getZ() + (Town.SIZE_Z / 2);
 				TownUtil.createTown(p.getName(), e.getMessage(), minX, minZ, maxX, maxZ);
 				p.sendMessage("§aDie Stadt §b"+e.getMessage()+" §bwurde erfolgreich erstellt!");
+				ServerPlugin.create.remove(p);
 			}
 		}
 	}

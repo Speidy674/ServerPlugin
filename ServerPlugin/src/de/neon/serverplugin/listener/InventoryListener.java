@@ -6,6 +6,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 
+import de.neon.serverplugin.ServerPlugin;
+
 public class InventoryListener implements Listener {
 
 	@EventHandler
@@ -30,6 +32,7 @@ public class InventoryListener implements Listener {
 			if(e.getCurrentItem().getType() == Material.COMPASS) {
 				Player p = (Player) e.getWhoClicked();
 				p.sendMessage("ß6Schreibe in den Chat, wie deine Stadt heiﬂen soll.");
+				ServerPlugin.create.add(p);
 				p.closeInventory();
 			}
 			e.setCancelled(true);

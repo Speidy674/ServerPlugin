@@ -13,7 +13,7 @@ import de.neon.serverplugin.town.Town;
 public class TownUtil {
 
 	public static boolean isMemberInTown(Player p) {
-		return DataUtil.gets(p, "town") != "null";
+		return !DataUtil.gets(p, "town").equalsIgnoreCase("null");
 	}
 	
 	public static boolean ownsTown(Player p) {
@@ -58,7 +58,7 @@ public class TownUtil {
 	}
 	
 	public static boolean createTown(String owner, String name, double minX, double minZ, double maxX, double maxZ) {
-		File file = new File(ServerPlugin.towns+"/"+name+".yml");
+		File file = new File(ServerPlugin.town+"/"+name+".yml");
 		if(file.exists()) {
 			return false;
 		}
