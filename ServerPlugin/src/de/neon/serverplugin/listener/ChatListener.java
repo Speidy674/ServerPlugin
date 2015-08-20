@@ -57,7 +57,7 @@ public class ChatListener implements Listener {
 					p.sendMessage("§4Der Spieler "+e.getMessage()+" ist bereits in einer Stadt. Bitte versuche es erneut.");
 					return;
 				}
-				target.sendMessage("§b"+p.getName()+" §4möchte, dass du ein Bewohner seiner Stadt §b"+town.getName()+" §awirst.");
+				target.sendMessage("§b"+p.getName()+" §6möchte, dass du ein Bewohner seiner Stadt §b"+town.getName()+" §6wirst.");
 				JSONChatMessage messageA = new JSONChatMessage("Um die Anfrage anzunehmen, klicke ", JSONChatColor.GOLD, null);
 				JSONChatExtra extraA = new JSONChatExtra("[AKZEPTIEREN]", JSONChatColor.GREEN, Arrays.asList(JSONChatFormat.BOLD));
 				extraA.setHoverEvent(JSONChatHoverEventType.SHOW_TEXT, "Werde ein Bewohner der Stadt "+town.getName()+".");

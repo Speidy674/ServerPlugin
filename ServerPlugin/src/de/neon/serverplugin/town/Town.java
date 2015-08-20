@@ -39,7 +39,8 @@ public class Town {
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 		for(int i = 0; i < MAX_MEMBERS; i++) {
 			if(config.getString("member"+i).equals("")) {
-				config.set("members"+i, s);
+				config.set("member"+i, s);
+				return;
 			}
 		}
 		try {
@@ -55,7 +56,8 @@ public class Town {
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 		for(int i = 0; i < MAX_MEMBERS; i++) {
 			if(config.getString("member"+i).equals(s)) {
-				config.set("members"+i, "");
+				config.set("member"+i, "");
+				return;
 			}
 		}
 		try {

@@ -11,6 +11,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import de.neon.serverplugin.DataUtil;
 import de.neon.serverplugin.ServerPlugin;
 import de.neon.serverplugin.TownUtil;
 import de.neon.serverplugin.Util;
@@ -26,6 +27,11 @@ public class TownCommand implements CommandExecutor {
 					if(ServerPlugin.create.contains(p)) {
 						ServerPlugin.create.remove(p);
 						p.sendMessage("§6Du erstellst nun keine Stadt mehr.");
+						return true;
+					}
+					if(ServerPlugin.invite.contains(p)) {
+						ServerPlugin.invite.remove(p);
+						p.sendMessage("§6Du lädst nun niemanden ein.");
 						return true;
 					}
 					if(!TownUtil.isInTown(p)) {
@@ -54,6 +60,7 @@ public class TownCommand implements CommandExecutor {
 								Bukkit.getPlayer(town.getOwner()).sendMessage("§b"+p.getName()+" §aist nun ein Bewohner deiner Stadt!");
 							}
 							Util.townInviteList.remove(p);
+							DataUtil.set(p, "town", town.getName());
 							return true;
 						}
 					}
