@@ -38,9 +38,9 @@ public class Town {
 		File file = new File(ServerPlugin.town+"/"+name+".yml");
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 		for(int i = 0; i < MAX_MEMBERS; i++) {
-			if(config.getString("member"+i).equals("")) {
+			if(config.getString("member"+i).equals("null")) {
 				config.set("member"+i, s);
-				return;
+				break;
 			}
 		}
 		try {
@@ -56,8 +56,8 @@ public class Town {
 		FileConfiguration config = YamlConfiguration.loadConfiguration(file);
 		for(int i = 0; i < MAX_MEMBERS; i++) {
 			if(config.getString("member"+i).equals(s)) {
-				config.set("member"+i, "");
-				return;
+				config.set("member"+i, "null");
+				break;
 			}
 		}
 		try {

@@ -97,7 +97,7 @@ public class TownUtil {
 		config.addDefault("maxX", maxX);
 		config.addDefault("maxZ", maxZ);
 		for(int i = 0; i < Town.MAX_MEMBERS; i++) {
-			config.addDefault("member"+i, "");
+			config.addDefault("member"+i, "null");
 		}
 		try {
 			config.save(file);
