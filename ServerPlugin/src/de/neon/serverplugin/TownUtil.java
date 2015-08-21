@@ -125,7 +125,7 @@ public class TownUtil {
 		config.addDefault("name", name);
 		config.addDefault("owner", owner);
 		config.addDefault("welcome", "&aHallo %player% in der Stadt %town%!");
-		config.addDefault("welcome", "&cTschüss, %player%!");
+		config.addDefault("adoption", "&cTschüss, %player%!");
 		config.addDefault("minX", minX);
 		config.addDefault("minZ", minZ);
 		config.addDefault("maxX", maxX);

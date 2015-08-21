@@ -113,7 +113,11 @@ public class TownCommand implements CommandExecutor {
 		ItemStack owner = new ItemStack(Material.SKULL_ITEM);
 		SkullMeta ownerMeta = (SkullMeta) owner.getItemMeta();
 		owner.setDurability((short) 3);
-		ownerMeta.setDisplayName("§6Owner: "+TownUtil.getTown(p).getOwner());
+		if(Bukkit.getPlayer(TownUtil.getTown(p).getOwner()) == null) {
+			ownerMeta.setDisplayName("§cOwner: "+TownUtil.getTown(p).getOwner());
+		} else {
+			ownerMeta.setDisplayName("§aOwner: "+TownUtil.getTown(p).getOwner());
+		}
 		owner.setItemMeta(ownerMeta);
 		inv.addItem(member);
 		inv.addItem(owner);
